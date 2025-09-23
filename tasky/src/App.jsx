@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 function App() {
 
-      const [ taskState, setTaskState ] = useState({
+  const [ taskState, setTaskState ] = useState({
     tasks: [
       { id: 1, title:"Dishes", description: "Empty dishwasher", deadline: "Today", priority: "high", done: false},
       { id: 2, title: "Laundry", description: "Fold clothes and put away", deadline: "Tomorrow", priority: "medium", done: false},
@@ -20,6 +20,13 @@ function App() {
     setTaskState({tasks});
     console.log(`${taskIndex} ${tasks[taskIndex].done}`);
   }
+
+  const deleteHandler = (taskIndex) => {
+    const tasks = [...taskState.tasks];
+    tasks.splice(taskIndex, 1);
+    setTaskState({tasks});
+  } 
+
   
     return (
     <div className="container">
@@ -33,7 +40,7 @@ function App() {
       key={task.id}
       done={task.done}
       markDone={() => doneHandler(index)}
-
+      deleteTask = {() => deleteHandler(index)}
     />
   ))} 
     </div>
